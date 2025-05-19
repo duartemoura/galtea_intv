@@ -1,0 +1,12 @@
+requests
+langchain>=0.1.0
+langchain-openai>=0.0.5
+langchain-chroma>=0.0.1
+langchain-community>=0.0.1
+sentence-transformers
+chromadb
+pypdf
+nltk
+streamlit
+openai>=1.12.0
+python-dotenv
