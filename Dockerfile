@@ -1,5 +1,5 @@
 # Use Python 3.9 as base image
-FROM python:3.9-slim
+FROM python:3.9-slim as builder
 
 # Set working directory
 WORKDIR /app
@@ -11,10 +11,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Copy requirements first and install
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt && \
+    find /usr/local/lib/python3.9/site-packages -type d -name "tests" -exec rm -rf {} + && \
+    find /usr/local/lib/python3.9/site-packages -type d -name "test" -exec rm -rf {} + && \
+    find /usr/local/lib/python3.9/site-packages -type f -name "*.pyc" -delete && \
+    find /usr/local/lib/python3.9/site-packages -type f -name "*.pyo" -delete
 
-# Copy entire project
-COPY . .
+# Final stage
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Copy only necessary files from builder
+COPY --from=builder /usr/local/lib/python3.9/site-packages/ /usr/local/lib/python3.9/site-packages/
+COPY --from=builder /usr/local/bin/ /usr/local/bin/
+
+# Copy only necessary application files
+COPY ui/ ui/
+COPY src/ src/
+COPY requirements.txt .
 
 # Set Python path for relative imports
 ENV PYTHONPATH=/app
