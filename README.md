@@ -39,6 +39,7 @@ touch .env
 ```env
 # Required
 OPENAI_API_KEY=your_openai_api_key_here
+```
 
 ### Option 2: Docker Installation
 
