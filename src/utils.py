@@ -21,7 +21,7 @@ def summarize_document(text: str) -> str:
     
     # System prompt for summarization
     system_prompt = (
-        "You are an AI assistant that summarizes documents. "
+        "You are an AI assistant that summarizes documents."
         "You will be given a document and you need to summarize it in a few sentences."
         "You must be very concise and to the point. "
         "Extract the inherent information from the document and summarize it."

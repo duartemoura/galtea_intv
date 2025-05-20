@@ -10,7 +10,7 @@ if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY environment variable is not set")
 
 # Model configuration
-CHAT_MODEL_NAME = "gpt-4.1-2025-04-14"  # Default model for chat interactions
+CHAT_MODEL_NAME = "gpt-4.1-mini"  # Default model for chat interactions
 RAG_DECISION_MODEL_NAME = "gpt-4.1-nano"  # Model for deciding whether to use RAG
 SUMMARY_MODEL_NAME = "gpt-4.1-nano"  # Model for document summarization
 
