@@ -155,7 +155,7 @@ class VectorDB:
             print(f"Error uploading documents: {str(e)}")
             return False
             
-    def retrieve_context(self, query: str, k: int = 3, chunk_window_size: int = 4) -> Tuple[str, List[Dict[str, Any]]]:
+    def retrieve_context(self, query: str, k: int = 3, chunk_window_size: int = 2) -> Tuple[str, List[Dict[str, Any]]]:
         """
         Retrieve top-k most relevant chunks for the query, and expand them with nearby chunks.
         Also return a short source preview for reference.

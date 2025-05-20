@@ -4,7 +4,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Add the project root directory to the Python path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, project_root)
 
@@ -13,7 +12,6 @@ from src.utils import should_use_rag
 
 def calculate_metrics(ground_truths, predictions, confidence_scores):
     """Calculate accuracy metrics."""
-    # Calculate confusion matrix metrics
     true_positives = sum(1 for gt, pred in zip(ground_truths, predictions) 
                         if gt == 'Use RAG' and pred == 'Use RAG')
     false_positives = sum(1 for gt, pred in zip(ground_truths, predictions) 
@@ -42,12 +40,11 @@ def plot_performance_metrics(metrics_dict):
     models = list(metrics_dict.keys())
     metrics = ['weighted_accuracy', 'f1_score']
     
-    # Set up the plot
+
     plt.figure(figsize=(10, 6))
     x = range(len(models))
-    width = 0.35  # Adjusted width for two metrics
+    width = 0.35  
     
-    # Create bars for each metric
     for i, metric in enumerate(metrics):
         values = [metrics_dict[model][metric] for model in models]
         plt.bar([xi + i*width for xi in x], values, width, label=metric.replace('_', ' ').title())
