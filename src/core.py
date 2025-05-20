@@ -6,7 +6,7 @@ from .db import VectorDB
 from .utils import should_use_rag
 
 class GalteaChat:
-    def __init__(self, documents_dir: str = "data"):
+    def __init__(self, documents_dir: str = "docs"):
         """
         Initialize the GalteaChat system.
         
