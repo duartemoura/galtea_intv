@@ -25,7 +25,7 @@ def summarize_document(text: str) -> str:
         "You will be given a document and you need to summarize it in a few sentences."
         "You must be very concise and to the point. "
         "Extract the inherent information from the document and summarize it."
-        "Watever the language the document is in, summarize it in English."
+        "Whatever the language the document is in, summarize it in English."
     )
     
     # Prepare messages
@@ -74,7 +74,6 @@ def should_use_rag(message: str, summaries: str, model_name: Optional[str] = Non
             "1. Is the question about topics covered in the documents?\n"
             "2. Would the documents contain information needed to answer the question?\n"
             "3. Is the question general knowledge or specific to the document content?\n"
-            "4. Is the question asking for a summary or overview of the available documents?\n\n"
             "Respond with a confidence score (0-100) indicating how likely it is that the question "
             "can be answered using the document content. "
             "If the score is above 70, the question is RAG-worthy.\n\n"

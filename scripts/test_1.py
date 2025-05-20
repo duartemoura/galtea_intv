@@ -18,19 +18,19 @@ def main():
 
     # Test document-specific query
     print("\nTesting VW service query:")
-    response, sources = chat.process_message("¿Qué incluye el servicio de mantenimiento de los 30,000 km?")
+    response, sources = chat.process_message("What does the 30,000 km maintenance service include?")
     print(f"Response: {response}")
     print(f"Sources: {sources}")
 
     # Test another relevant query
     print("\nTesting DSG transmission query:")
-    response, sources = chat.process_message("¿Cada cuánto se cambia el aceite de la transmisión DSG?")
+    response, sources = chat.process_message("How often should the DSG transmission oil be changed?")
     print(f"Response: {response}")
     print(f"Sources: {sources}")
 
     # Optional general query to ensure separation
     print("\nTesting general query (should not be related to VW):")
-    response, sources = chat.process_message("¿Qué vacinas se necesitan para viajar a África?")
+    response, sources = chat.process_message("What vaccines are needed to travel to Africa?")
     print(f"Response: {response}")
     print(f"Sources: {sources}") # should be empty
 

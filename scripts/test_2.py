@@ -13,10 +13,6 @@ from src.utils import should_use_rag
 
 def calculate_metrics(ground_truths, predictions, confidence_scores):
     """Calculate accuracy metrics."""
-    correct = sum(1 for gt, pred in zip(ground_truths, predictions) if gt == pred)
-    total = len(ground_truths)
-    accuracy = (correct / total) * 100
-    
     # Calculate confusion matrix metrics
     true_positives = sum(1 for gt, pred in zip(ground_truths, predictions) 
                         if gt == 'Use RAG' and pred == 'Use RAG')
@@ -28,27 +24,28 @@ def calculate_metrics(ground_truths, predictions, confidence_scores):
     precision = true_positives / (true_positives + false_positives) if (true_positives + false_positives) > 0 else 0
     recall = true_positives / (true_positives + false_negatives) if (true_positives + false_negatives) > 0 else 0
     
+    # Calculate F1 score
+    f1_score = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+    
     # Calculate weighted accuracy based on confidence scores
     weighted_correct = sum(score/100 for gt, pred, score in zip(ground_truths, predictions, confidence_scores) 
                           if gt == pred)
     weighted_accuracy = (weighted_correct / len(ground_truths)) * 100
     
     return {
-        'accuracy': accuracy,
         'weighted_accuracy': weighted_accuracy,
-        'precision': precision * 100,
-        'recall': recall * 100
+        'f1_score': f1_score * 100
     }
 
 def plot_performance_metrics(metrics_dict):
     """Plot performance metrics for all models."""
     models = list(metrics_dict.keys())
-    metrics = ['accuracy', 'weighted_accuracy', 'precision', 'recall']
+    metrics = ['weighted_accuracy', 'f1_score']
     
     # Set up the plot
-    plt.figure(figsize=(15, 6))
+    plt.figure(figsize=(10, 6))
     x = range(len(models))
-    width = 0.2  # Reduced width to accommodate more metrics
+    width = 0.35  # Adjusted width for two metrics
     
     # Create bars for each metric
     for i, metric in enumerate(metrics):
@@ -59,7 +56,7 @@ def plot_performance_metrics(metrics_dict):
     plt.xlabel('Models')
     plt.ylabel('Score (%)')
     plt.title('RAG Performance Metrics by Model')
-    plt.xticks([xi + width*1.5 for xi in x], models, rotation=45)
+    plt.xticks([xi + width/2 for xi in x], models, rotation=45)
     plt.legend()
     plt.grid(True, alpha=0.3)
     
@@ -70,25 +67,25 @@ def plot_performance_metrics(metrics_dict):
 
 def test_rag_worthy():
     # Initialize the chat system
-    chat = GalteaChat(documents_dir="data")
+    chat = GalteaChat(documents_dir="docs")
     
     # Test questions
     test_questions = [
         # Questions that should be RAG-worthy (about document content)
-        "¿Cada cuánto se debe cambiar el aceite del sistema DSG?",
-        "¿Qué incluye la revisión gratuita de 30 puntos al llegar a un Servicio Oficial?",
-        "¿Qué operaciones cubre el Mantenimiento Plus Volkswagen?",
-        "¿Qué beneficios tiene contratar un seguro con Volkswagen Seguros by Zurich?",
+        "How often should the DSG system oil be changed?",
+        "What is included in the free 30-point inspection at an Official Service?",
+        "What operations are covered by Volkswagen Plus Maintenance?",
+        "What are the benefits of getting insurance with Volkswagen Insurance by Zurich?",
         
         # Questions that should not be RAG-worthy (general knowledge)
-        "¿Cómo funciona un motor de combustión interna?",
-        "¿Cuál es la presión ideal de los neumáticos en un coche compacto?",
-        "¿Qué hacer si un coche eléctrico no arranca?",
+        "How does an internal combustion engine work?",
+        "What is the ideal tire pressure for a compact car?",
+        "What to do if an electric car won't start?",
         
         # Edge cases
-        "¿Qué servicios están incluidos en una inspección técnica en Volkswagen?",  
-        "¿Qué tipo de aceite recomienda Volkswagen para sus motores?",
-        "¿Dónde puedo encontrar el historial digital de mantenimiento de mi Volkswagen?",
+        "What services are included in a technical inspection at Volkswagen?",
+        "What type of oil does Volkswagen recommend for their engines?",
+        "Where can I find the digital maintenance history of my Volkswagen?",
     ]
     
     # Load ground truths
@@ -127,10 +124,8 @@ def test_rag_worthy():
         
         # Print metrics
         print(f"\nModel Performance Metrics:")
-        print(f"Accuracy: {metrics['accuracy']:.2f}%")
         print(f"Weighted Accuracy: {metrics['weighted_accuracy']:.2f}%")
-        print(f"Precision: {metrics['precision']:.2f}%")
-        print(f"Recall: {metrics['recall']:.2f}%")
+        print(f"F1 Score: {metrics['f1_score']:.2f}%")
     
     # Plot the results
     plot_performance_metrics(metrics_dict)

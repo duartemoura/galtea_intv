@@ -1,11 +1,11 @@
 Question,Confidence Score,Decision
-¿Cada cuánto se debe cambiar el aceite del sistema DSG?,90,Use RAG
-¿Qué incluye la revisión gratuita de 30 puntos al llegar a un Servicio Oficial?,85,Use RAG
-¿Qué operaciones cubre el Mantenimiento Plus Volkswagen?,92,Use RAG
-¿Qué beneficios tiene contratar un seguro con Volkswagen Seguros by Zurich?,80,Use RAG
-¿Cómo funciona un motor de combustión interna?,15,Skip RAG
-¿Cuál es la presión ideal de los neumáticos en un coche compacto?,30,Skip RAG
-¿Qué hacer si un coche eléctrico no arranca?,25,Skip RAG
-¿Qué servicios están incluidos en una inspección técnica en Volkswagen?,72,Use RAG
-¿Qué tipo de aceite recomienda Volkswagen para sus motores?,68,Skip RAG
-¿Dónde puedo encontrar el historial digital de mantenimiento de mi Volkswagen?,75,Use RAG
+How often should the DSG system oil be changed?,90,Use RAG
+What is included in the free 30-point inspection at an Official Service?,85,Use RAG
+What operations are covered by Volkswagen Plus Maintenance?,92,Use RAG
+What are the benefits of getting insurance with Volkswagen Insurance by Zurich?,80,Use RAG
+How does an internal combustion engine work?,15,Skip RAG
+What is the ideal tire pressure for a compact car?,30,Skip RAG
+What to do if an electric car won't start?,25,Skip RAG
+What services are included in a technical inspection at Volkswagen?,72,Use RAG
+What type of oil does Volkswagen recommend for their engines?,68,Skip RAG
+Where can I find the digital maintenance history of my Volkswagen?,75,Use RAG
