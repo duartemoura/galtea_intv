@@ -1,4 +1,6 @@
-# Galtea Interview
+# Galtea Interview - Simple RAG application
+
+## Duarte Moura 
 
 ## Features
 
@@ -124,6 +126,8 @@ The vector database (Chroma) provides:
 ### Utils
 The utils module provides:
 - Helper functions for the main application
+
+#### ⚠️ If you are using this code for the first time, you will need to put a document in the database. You can do it through the UI or using script/handle_documents.py
 
 
 
